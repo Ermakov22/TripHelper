@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity implements FirstStartFragmen
     FragmentTransaction fragmentTransaction;
     Fragment currentFragment;
     String CITY;
-    
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
