@@ -18,12 +18,14 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import com.example.triphelper.R;
+import com.example.triphelper.fragment.MainFragments.ListOfPlacesFragment;
+import com.example.triphelper.mvp.core.FragmentById;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ThirdStartFragment extends Fragment implements View.OnClickListener {
-    Button next;
+    Button nextFragmentBtn;
     AutoCompleteTextView city;
     String cityName;
     boolean success;
@@ -35,13 +37,13 @@ public class ThirdStartFragment extends Fragment implements View.OnClickListener
                              @Nullable Bundle savedInstanceState) {
         View rootView =
                 inflater.inflate(R.layout.third_start_fragment, container, false);
-        next = (Button) rootView.findViewById(R.id.nextFragmentBtn);
+        nextFragmentBtn = (Button) rootView.findViewById(R.id.nextFragmentBtn);
         city =  (AutoCompleteTextView) rootView.findViewById(R.id.cityTxt);
         firstStepBtn = (RadioButton) rootView.findViewById(R.id.firstStepBtn);
         secondStepBtn = (RadioButton) rootView.findViewById(R.id.secondStepBtn);
         firstStepBtn.setOnClickListener(this);
         secondStepBtn.setOnClickListener(this);
-        next.setOnClickListener(this);
+        nextFragmentBtn.setOnClickListener(this);
         fillListCities();
         uploadAutoTxtViewCities();
         return rootView;
@@ -51,30 +53,26 @@ public class ThirdStartFragment extends Fragment implements View.OnClickListener
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.nextFragmentBtn:
-                cityName = city.getText().toString();
-                if(cityName.length() == 0)
-                    success = false;
-                else success = true;
-                ThirdStartFragment.OnNextButtonListener listener = (ThirdStartFragment.OnNextButtonListener) getActivity();
-                listener.onNextSelected(cityName, success, new ThirdStartFragment());
+                OnNextButtonListener listenerNext = (OnNextButtonListener) getActivity();
+                listenerNext.onNextSelected(new ListOfPlacesFragment(), FragmentById.LIST_OF_PLACES_FRAGMENT);
                 break;
             case R.id.firstStepBtn:
-                ThirdStartFragment.OnBackButtonListener listenerBackFirst = (ThirdStartFragment.OnBackButtonListener) getActivity();
-                listenerBackFirst.onBackSelected(new FirstStartFragment());
+                OnBackButtonListener listenerBackFirst = (OnBackButtonListener) getActivity();
+                listenerBackFirst.onBackSelected(new FirstStartFragment(), FragmentById.FIRST_START_FRAGMENT);
                 break;
             case R.id.secondStepBtn:
-                ThirdStartFragment.OnBackButtonListener listenerBackSecond = (ThirdStartFragment.OnBackButtonListener) getActivity();
-                listenerBackSecond.onBackSelected(new SecondStartFragment());
+                OnBackButtonListener listenerBackSecond = (OnBackButtonListener) getActivity();
+                listenerBackSecond.onBackSelected(new SecondStartFragment(), FragmentById.SECOND_START_FRAGMENT);
                 break;
         }
     }
 
     public interface OnNextButtonListener {
-        void onNextSelected(String city, boolean success, Fragment currentFragment);
+        void onNextSelected(Fragment currentFragment,  FragmentById fragmentId);
     }
 
     public interface OnBackButtonListener {
-        void onBackSelected(Fragment backFragment);
+        void onBackSelected(Fragment backFragment, FragmentById fragmentId);
     }
 
     void fillListCities() {
@@ -109,6 +107,4 @@ public class ThirdStartFragment extends Fragment implements View.OnClickListener
                 cities);
         city.setAdapter(adapter);
     }
-
-
 }

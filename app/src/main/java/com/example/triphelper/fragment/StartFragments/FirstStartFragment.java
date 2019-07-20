@@ -18,14 +18,12 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import com.example.triphelper.R;
+import com.example.triphelper.mvp.core.FragmentById;
 
 import java.util.List;
 
 public class FirstStartFragment extends Fragment implements View.OnClickListener {
     Button nextFragmentBtn;
-    String cityName;
-    boolean success;
-    List<String> cities;
     RadioButton firstStepBtn;
     @Nullable
     @Override
@@ -34,8 +32,6 @@ public class FirstStartFragment extends Fragment implements View.OnClickListener
         View rootView =
                 inflater.inflate(R.layout.first_start_fragment, container, false);
         nextFragmentBtn = (Button) rootView.findViewById(R.id.nextFragmentBtn);
-        firstStepBtn = (RadioButton) rootView.findViewById(R.id.firstStepBtn);
-        firstStepBtn.setOnClickListener(this);
         nextFragmentBtn.setOnClickListener(this);
         return rootView;
     }
@@ -45,12 +41,12 @@ public class FirstStartFragment extends Fragment implements View.OnClickListener
         switch (view.getId()){
             case R.id.nextFragmentBtn:
                 OnNextButtonListener listenerNext = (OnNextButtonListener) getActivity();
-                listenerNext.onNextSelected(new SecondStartFragment());
+                listenerNext.onNextSelected(new SecondStartFragment(), FragmentById.SECOND_START_FRAGMENT);
                 break;
         }
     }
 
     public interface OnNextButtonListener {
-        void onNextSelected(Fragment nextFragment);
+        void onNextSelected(Fragment nextFragment, FragmentById fragmentId);
     }
 }

@@ -18,6 +18,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import com.example.triphelper.R;
+import com.example.triphelper.mvp.core.FragmentById;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -54,21 +55,21 @@ public class SecondStartFragment extends Fragment implements View.OnClickListene
                     success = false;
                 else success = true;
                 OnNextButtonListener listenerNext = (OnNextButtonListener) getActivity();
-                listenerNext.onNextSelected(cityName, success, new ThirdStartFragment());
+                listenerNext.onNextSelected(cityName, success, new ThirdStartFragment(), FragmentById.THIRD_START_FRAGMENT);
                 break;
             case R.id.firstStepBtn:
                 OnBackButtonListener listenerBack = (OnBackButtonListener) getActivity();
-                listenerBack.onBackSelected(new FirstStartFragment());
+                listenerBack.onBackSelected(new FirstStartFragment(), FragmentById.FIRST_START_FRAGMENT);
                 break;
         }
     }
 
     public interface OnNextButtonListener {
-        void onNextSelected(String city, boolean success, Fragment nextFragment);
+        void onNextSelected(String city, boolean success, Fragment nextFragment, FragmentById fragmentId);
     }
 
     public interface OnBackButtonListener {
-        void onBackSelected(Fragment backFragment);
+        void onBackSelected(Fragment backFragment, FragmentById fragmentId);
     }
 
     void fillListCities() {
@@ -103,6 +104,4 @@ public class SecondStartFragment extends Fragment implements View.OnClickListene
                 cities);
         city.setAdapter(adapter);
     }
-
-
 }
