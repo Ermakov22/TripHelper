@@ -20,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
     static FragmentTransaction fragmentTransaction;
     static Context context;
     public static String CITY;
+    public static String HOTEl;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

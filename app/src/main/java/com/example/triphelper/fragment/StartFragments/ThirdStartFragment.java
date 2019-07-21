@@ -23,8 +23,8 @@ import java.util.List;
 
 public class ThirdStartFragment extends Fragment implements View.OnClickListener {
     Button nextFragmentBtn;
-    AutoCompleteTextView city;
-    List<String> cities;
+    AutoCompleteTextView hotel;
+    List<String> hotels;
     RadioButton firstStepBtn, secondStepBtn;
     @Nullable
     @Override
@@ -33,14 +33,14 @@ public class ThirdStartFragment extends Fragment implements View.OnClickListener
         View rootView =
                 inflater.inflate(R.layout.third_start_fragment, container, false);
         nextFragmentBtn = (Button) rootView.findViewById(R.id.nextFragmentBtn);
-        city =  (AutoCompleteTextView) rootView.findViewById(R.id.cityTxt);
+        hotel =  (AutoCompleteTextView) rootView.findViewById(R.id.hotelTxt);
         firstStepBtn = (RadioButton) rootView.findViewById(R.id.firstStepBtn);
         secondStepBtn = (RadioButton) rootView.findViewById(R.id.secondStepBtn);
         firstStepBtn.setOnClickListener(this);
         secondStepBtn.setOnClickListener(this);
         nextFragmentBtn.setOnClickListener(this);
-        fillListCities();
-        uploadAutoTxtViewCities();
+        fillListHotels();
+        uploadAutoTxtViewHotels();
         return rootView;
     }
 
@@ -48,7 +48,13 @@ public class ThirdStartFragment extends Fragment implements View.OnClickListener
     public void onClick(View view) {
         switch(view.getId()){
             case R.id.nextFragmentBtn:
-                MainActivity.changeNextFragment(new ListOfPlacesFragment(), FragmentByName.LIST_OF_PLACES_FRAGMENT);
+                String hotelName = hotel.getText().toString();
+                if(!hotelName.isEmpty()) {
+                    MainActivity.HOTEl = hotelName;
+                    MainActivity.changeNextFragment(new ListOfPlacesFragment(), FragmentByName.LIST_OF_PLACES_FRAGMENT);
+                }else{
+                    MainActivity.makeAnErrorToast("Отель не найден!");
+                }
                 break;
             case R.id.firstStepBtn:
                 MainActivity.returnToPreviousFragment(FragmentByName.FIRST_START_FRAGMENT);
@@ -59,20 +65,20 @@ public class ThirdStartFragment extends Fragment implements View.OnClickListener
         }
     }
 
-    void fillListCities() {
-        cities = new ArrayList<>();
-        cities.add("Мадрид");
-        cities.add("Махачкала");
-        cities.add("Мельбурн");
-        cities.add("Манхен");
-        cities.add("Магадан");
+    void fillListHotels() {
+        hotels = new ArrayList<>();
+        hotels.add("Мадрид");
+        hotels.add("Махачкала");
+        hotels.add("Мельбурн");
+        hotels.add("Манхен");
+        hotels.add("Магадан");
     }
 
 
-    void uploadAutoTxtViewCities() {
+    void uploadAutoTxtViewHotels() {
         ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(),
                 android.R.layout.simple_list_item_1,
-                cities);
-        city.setAdapter(adapter);
+                hotels);
+        hotel.setAdapter(adapter);
     }
 }

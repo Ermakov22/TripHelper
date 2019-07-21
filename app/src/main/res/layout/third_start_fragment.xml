@@ -42,7 +42,7 @@
        >
 
         <AutoCompleteTextView
-            android:id="@+id/cityTxt"
+            android:id="@+id/hotelTxt"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:hint="Введите город"
