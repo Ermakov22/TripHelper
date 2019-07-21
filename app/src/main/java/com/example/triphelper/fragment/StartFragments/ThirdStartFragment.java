@@ -1,25 +1,22 @@
 package com.example.triphelper.fragment.StartFragments;
 
 import android.os.Bundle;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.EditorInfo;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
-import android.widget.ListAdapter;
 import android.widget.RadioButton;
-import android.widget.SimpleAdapter;
-import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import com.example.triphelper.R;
+import com.example.triphelper.activity.MainActivity;
 import com.example.triphelper.fragment.MainFragments.ListOfPlacesFragment;
-import com.example.triphelper.mvp.core.FragmentById;
+import com.example.triphelper.mvp.core.FragmentByName;
+
+import org.androidannotations.annotations.ViewById;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,8 +24,6 @@ import java.util.List;
 public class ThirdStartFragment extends Fragment implements View.OnClickListener {
     Button nextFragmentBtn;
     AutoCompleteTextView city;
-    String cityName;
-    boolean success;
     List<String> cities;
     RadioButton firstStepBtn, secondStepBtn;
     @Nullable
@@ -51,28 +46,17 @@ public class ThirdStartFragment extends Fragment implements View.OnClickListener
 
     @Override
     public void onClick(View view) {
-        switch (view.getId()){
+        switch(view.getId()){
             case R.id.nextFragmentBtn:
-                OnNextButtonListener listenerNext = (OnNextButtonListener) getActivity();
-                listenerNext.onNextSelected(new ListOfPlacesFragment(), FragmentById.LIST_OF_PLACES_FRAGMENT);
+                MainActivity.changeNextFragment(new ListOfPlacesFragment(), FragmentByName.LIST_OF_PLACES_FRAGMENT);
                 break;
             case R.id.firstStepBtn:
-                OnBackButtonListener listenerBackFirst = (OnBackButtonListener) getActivity();
-                listenerBackFirst.onBackSelected(new FirstStartFragment(), FragmentById.FIRST_START_FRAGMENT);
+                MainActivity.returnToPreviousFragment(FragmentByName.FIRST_START_FRAGMENT);
                 break;
             case R.id.secondStepBtn:
-                OnBackButtonListener listenerBackSecond = (OnBackButtonListener) getActivity();
-                listenerBackSecond.onBackSelected(new SecondStartFragment(), FragmentById.SECOND_START_FRAGMENT);
+                MainActivity.returnToPreviousFragment(FragmentByName.SECOND_START_FRAGMENT);
                 break;
         }
-    }
-
-    public interface OnNextButtonListener {
-        void onNextSelected(Fragment currentFragment,  FragmentById fragmentId);
-    }
-
-    public interface OnBackButtonListener {
-        void onBackSelected(Fragment backFragment, FragmentById fragmentId);
     }
 
     void fillListCities() {
@@ -81,22 +65,6 @@ public class ThirdStartFragment extends Fragment implements View.OnClickListener
         cities.add("Махачкала");
         cities.add("Мельбурн");
         cities.add("Манхен");
-        cities.add("Магадан");
-        cities.add("Магадан");
-        cities.add("Магадан");
-        cities.add("Магадан");
-        cities.add("Магадан");
-        cities.add("Магадан");
-        cities.add("Магадан");
-        cities.add("Магадан");
-        cities.add("Магадан");
-        cities.add("Магадан");
-        cities.add("Магадан");
-        cities.add("Магадан");
-        cities.add("Магадан");
-        cities.add("Магадан");
-        cities.add("Магадан");
-        cities.add("Магадан");
         cities.add("Магадан");
     }
 
