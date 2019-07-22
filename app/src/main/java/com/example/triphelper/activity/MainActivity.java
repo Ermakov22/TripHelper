@@ -16,9 +16,9 @@ import com.example.triphelper.mvp.core.FragmentByName;
 import org.jetbrains.annotations.NotNull;
 
 public class MainActivity extends AppCompatActivity {
-    static FragmentManager fragmentManager;
-    static FragmentTransaction fragmentTransaction;
-    static Context context;
+    public static FragmentManager fragmentManager;
+    public static FragmentTransaction fragmentTransaction;
+    public static Context context;
     public static String CITY;
     public static String HOTEl;
     @Override
