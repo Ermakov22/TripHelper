@@ -14,11 +14,9 @@ import androidx.fragment.app.Fragment;
 import com.example.triphelper.R;
 import com.example.triphelper.activity.MainActivity;
 import com.example.triphelper.fragment.MainFragments.ListOfPlacesFragment;
-import com.example.triphelper.handler.FragmentManager;
+import com.example.triphelper.handler.FragmentController;
+import com.example.triphelper.handler.SystemFunctions;
 import com.example.triphelper.mvp.core.FragmentByName;
-
-import org.androidannotations.annotations.ViewById;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -52,16 +50,16 @@ public class ThirdStartFragment extends Fragment implements View.OnClickListener
                 String hotelName = hotel.getText().toString();
                 if(!hotelName.isEmpty()) {
                     MainActivity.HOTEl = hotelName;
-                    FragmentManager.changeNextFragment(new ListOfPlacesFragment(), FragmentByName.LIST_OF_PLACES_FRAGMENT);
+                    FragmentController.changeNextFragment(new ListOfPlacesFragment(), FragmentByName.LIST_OF_PLACES_FRAGMENT);
                 }else{
-                    FragmentManager.makeAnErrorToast("Отель не найден!");
+                    SystemFunctions.makeAnErrorToast("Отель не найден!");
                 }
                 break;
             case R.id.firstStepBtn:
-                FragmentManager.returnToPreviousFragment(FragmentByName.FIRST_START_FRAGMENT);
+                FragmentController.returnToPreviousFragment(FragmentByName.FIRST_START_FRAGMENT);
                 break;
             case R.id.secondStepBtn:
-                FragmentManager.returnToPreviousFragment(FragmentByName.SECOND_START_FRAGMENT);
+                FragmentController.returnToPreviousFragment(FragmentByName.SECOND_START_FRAGMENT);
                 break;
         }
     }

@@ -13,7 +13,8 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import com.example.triphelper.R;
 import com.example.triphelper.activity.MainActivity;
-import com.example.triphelper.handler.FragmentManager;
+import com.example.triphelper.handler.FragmentController;
+import com.example.triphelper.handler.SystemFunctions;
 import com.example.triphelper.mvp.core.FragmentByName;
 
 import java.util.ArrayList;
@@ -49,13 +50,13 @@ public class SecondStartFragment extends Fragment implements View.OnClickListene
                 String cityName = city.getText().toString();
                 if(!cityName.isEmpty()) {
                     MainActivity.CITY = cityName;
-                    FragmentManager.changeNextFragment(new ThirdStartFragment(), FragmentByName.THIRD_START_FRAGMENT);
+                    FragmentController.changeNextFragment(new ThirdStartFragment(), FragmentByName.THIRD_START_FRAGMENT);
                 }else{
-                    FragmentManager.makeAnErrorToast("Город не найден!");
+                    SystemFunctions.makeAnErrorToast("Город не найден!");
                 }
                 break;
             case R.id.firstStepBtn:
-                FragmentManager.returnToPreviousFragment(FragmentByName.FIRST_START_FRAGMENT);
+                FragmentController.returnToPreviousFragment(FragmentByName.FIRST_START_FRAGMENT);
                 break;
         }
     }

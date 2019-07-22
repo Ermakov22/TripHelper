@@ -9,8 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import com.example.triphelper.R;
-import com.example.triphelper.activity.MainActivity;
-import com.example.triphelper.handler.FragmentManager;
+import com.example.triphelper.handler.FragmentController;
 import com.example.triphelper.mvp.core.FragmentByName;
 
 public class FirstStartFragment extends Fragment implements View.OnClickListener {
@@ -30,7 +29,7 @@ public class FirstStartFragment extends Fragment implements View.OnClickListener
     public void onClick(View view) {
         switch(view.getId()){
             case R.id.nextFragmentBtn:
-                FragmentManager.changeNextFragment(new SecondStartFragment(), FragmentByName.SECOND_START_FRAGMENT);
+                FragmentController.changeNextFragment(new SecondStartFragment(), FragmentByName.SECOND_START_FRAGMENT);
                 break;
         }
     }

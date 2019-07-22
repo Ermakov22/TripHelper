@@ -45,7 +45,7 @@
             android:id="@+id/hotelTxt"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:hint="Введите город"
+            android:hint="Введите отель"
             android:backgroundTint="@color/Maroon"
             android:completionThreshold="1"
             android:dropDownHeight="300dp"
