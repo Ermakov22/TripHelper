@@ -17,6 +17,7 @@ public class MainActivity extends AppCompatActivity {
     public static Context context;
     public static String CITY;
     public static String HOTEl;
+    static public int WIDTH, HEIGHT;
     public static final String MY_SETTINGS = "my_settings";
     public static SharedPreferences sp;
     MainActivity mainActivity = this;
@@ -24,7 +25,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        getSupportActionBar().hide();
+        WIDTH = getWindowManager().getDefaultDisplay().getWidth();
+        HEIGHT = getWindowManager().getDefaultDisplay().getHeight();
+      //  getSupportActionBar().hide();
         context = this;
         fragmentManager = getSupportFragmentManager();
         sp = getSharedPreferences(MY_SETTINGS,
