@@ -13,7 +13,7 @@ public class Categories {
     void setText(String text){
         this.text = text;
     }
-    int getImageID(){
+    public int getImageID(){
         return imageID;
     }
     public String getText(){

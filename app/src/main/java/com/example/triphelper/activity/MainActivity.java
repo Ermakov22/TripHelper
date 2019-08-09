@@ -21,11 +21,14 @@ public class MainActivity extends AppCompatActivity {
     static Context context;
     public static String CITY;
     public static String HOTEl;
+    static public int WIDTH, HEIGHT;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        getSupportActionBar().hide();
+        WIDTH = getWindowManager().getDefaultDisplay().getWidth();
+        HEIGHT = getWindowManager().getDefaultDisplay().getHeight();
+      //  getSupportActionBar().hide();
         context = this;
         fragmentManager = getSupportFragmentManager();
         changeNextFragment(new FirstStartFragment(), FragmentByName.FIRST_START_FRAGMENT);
