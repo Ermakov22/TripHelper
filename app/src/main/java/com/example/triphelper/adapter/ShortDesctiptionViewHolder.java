@@ -77,5 +77,5 @@ public class ShortDesctiptionViewHolder extends  RecyclerView.ViewHolder  {
        }
    });
 
-}
+    }
 }

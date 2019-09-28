@@ -19,7 +19,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.237"
         app:layout_constraintWidth_percent="0.65"
-        app:srcCompat="@drawable/destination" />
+        app:srcCompat="@drawable/destination1" />
 
     <TextView
         android:id="@+id/slide_heading"

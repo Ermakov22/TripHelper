@@ -23,7 +23,7 @@ public class SliderAdapter extends PagerAdapter {
     }
 
     public int[] slide_images = {
-            R.drawable.destination,
+            R.drawable.destination1,
             R.drawable.sight,
             R.drawable.users
     };
