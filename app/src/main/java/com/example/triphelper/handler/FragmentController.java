@@ -12,7 +12,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class FragmentController {
     public static void changeNextFragment(Fragment fragment, @NotNull FragmentByName fragmentByName){
-        if(fragmentByName.equalsName(FragmentByName.FIRST_START_FRAGMENT.toString())){
+        if(fragmentByName.equalsName(FragmentByName.LIST_OF_PLACES_FRAGMENT.toString())){
             MainActivity.fragmentTransaction = MainActivity.fragmentManager.beginTransaction();
             MainActivity.fragmentTransaction.add(R.id.main_layout, fragment);
             MainActivity.fragmentTransaction.commit();
@@ -25,7 +25,7 @@ public class FragmentController {
         }
     }
     public static void returnToPreviousFragment(@NotNull FragmentByName fragmentByName){
-        if(fragmentByName.equalsName(FragmentByName.FIRST_START_FRAGMENT.toString()))
+        if(fragmentByName.equalsName(FragmentByName.LIST_OF_PLACES_FRAGMENT.toString()))
             MainActivity.fragmentManager.popBackStack(null, androidx.fragment.app.FragmentManager.POP_BACK_STACK_INCLUSIVE);
         else MainActivity.fragmentManager.popBackStackImmediate(fragmentByName.toString(), 0);
     }

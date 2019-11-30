@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.triphelper.R;
 import com.example.triphelper.activity.MainActivity;
 import com.example.triphelper.fragment.MainFragments.LongDescriptionFragment;
+import com.example.triphelper.handler.FragmentController;
 import com.example.triphelper.mvp.core.FragmentByName;
 import com.example.triphelper.struct.ShortDescription;
 
@@ -60,21 +61,21 @@ public class ShortDesctiptionViewHolder extends  RecyclerView.ViewHolder  {
    placeImage.setOnClickListener(new View.OnClickListener() {
        @Override
        public void onClick(View view) {
-           MainActivity.changeNextFragment(new LongDescriptionFragment(), FragmentByName.LONG_DESCRIPTION_FRAGMENT);
+           FragmentController.changeNextFragment(new LongDescriptionFragment(), FragmentByName.LONG_DESCRIPTION_FRAGMENT);
        }
    });
    name.setOnClickListener(new View.OnClickListener() {
        @Override
        public void onClick(View view) {
-           MainActivity.changeNextFragment(new LongDescriptionFragment(), FragmentByName.LONG_DESCRIPTION_FRAGMENT);
+           FragmentController.changeNextFragment(new LongDescriptionFragment(), FragmentByName.LONG_DESCRIPTION_FRAGMENT);
        }
    });
    shortDectiprionView.setOnClickListener(new View.OnClickListener() {
        @Override
        public void onClick(View view) {
-           MainActivity.changeNextFragment(new LongDescriptionFragment(), FragmentByName.LONG_DESCRIPTION_FRAGMENT);
+           FragmentController.changeNextFragment(new LongDescriptionFragment(), FragmentByName.LONG_DESCRIPTION_FRAGMENT);
        }
    });
 
-}
+    }
 }
