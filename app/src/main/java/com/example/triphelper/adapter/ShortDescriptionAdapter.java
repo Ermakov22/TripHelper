@@ -61,9 +61,9 @@ public class ShortDescriptionAdapter extends RecyclerView.Adapter<ShortDesctipti
                 for(int i = 0; i < descriptionListFull.size(); i++){
                     ShortDescription currItem = descriptionListFull.get(i);
                     if(currItem.getName().toLowerCase().contains(filterPattern)
-                    || currItem.getShortDectiprion().toLowerCase().trim().contains(filterPattern)
-                    || (currItem.getName() + currItem.getShortDectiprion()).toLowerCase().trim().contains(filterPattern)
-                    || ( currItem.getShortDectiprion() + currItem.getName()).toLowerCase().trim().contains(filterPattern)){
+                            || currItem.getShortDectiprion().toLowerCase().trim().contains(filterPattern)
+                            || (currItem.getName() + currItem.getShortDectiprion()).toLowerCase().trim().contains(filterPattern)
+                            || ( currItem.getShortDectiprion() + currItem.getName()).toLowerCase().trim().contains(filterPattern)){
                         filteredList.add(currItem);
                     }
                 }
@@ -75,9 +75,9 @@ public class ShortDescriptionAdapter extends RecyclerView.Adapter<ShortDesctipti
 
         @Override
         protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
-        descriptionList.clear();
-        descriptionList.addAll((List)filterResults.values);
-        notifyDataSetChanged();
+            descriptionList.clear();
+            descriptionList.addAll((List)filterResults.values);
+            notifyDataSetChanged();
         }
     };
 }

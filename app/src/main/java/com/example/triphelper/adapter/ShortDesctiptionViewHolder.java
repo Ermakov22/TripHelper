@@ -19,6 +19,7 @@ import com.example.triphelper.struct.ShortDescription;
 import static com.example.triphelper.activity.MainActivity.HEIGHT;
 import static com.example.triphelper.activity.MainActivity.WIDTH;
 import static com.example.triphelper.fragment.MainFragments.ListOfPlacesFragment.currIndexInListOfPlaces;
+import static com.example.triphelper.fragment.MainFragments.ListOfPlacesFragment.currNameInListOfPlaces;
 import static com.example.triphelper.fragment.MainFragments.ListOfPlacesFragment.listOfPlaces;
 
 public class ShortDesctiptionViewHolder extends  RecyclerView.ViewHolder  {
@@ -34,48 +35,51 @@ public class ShortDesctiptionViewHolder extends  RecyclerView.ViewHolder  {
         selectedImage = (ImageView) itemView.findViewById(R.id.imageSelected);
     }
     public void bind(ShortDescription shortDescription){
-    name.setText(shortDescription.getName());
-   shortDectiprionView.setText(shortDescription.getShortDectiprion());
+        name.setText(shortDescription.getName());
+        shortDectiprionView.setText(shortDescription.getShortDectiprion());
         int width = WIDTH;
         int height = HEIGHT / 10 * 3;
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(width,height);
         placeImage.setLayoutParams(params);
         placeImage.setImageResource(shortDescription.getImageId());
-   if(shortDescription.getIsChecked()) selectedImage.setImageResource(android.R.drawable.ic_delete);
-   else selectedImage.setImageResource(android.R.drawable.ic_input_add);
-   selectedImage.setOnClickListener(new View.OnClickListener() {
-       @Override
-       public void onClick(View view) {
-           if(shortDescription.getIsChecked()) {selectedImage.setImageResource(android.R.drawable.ic_input_add);
-           shortDescription.setIsChecked(false);
-           }
-           else {selectedImage.setImageResource(android.R.drawable.ic_delete);
-           shortDescription.setIsChecked(true);
-           }
-        for(int i = 0; i < listOfPlaces.get(currIndexInListOfPlaces).size(); i++)
-            if(listOfPlaces.get(currIndexInListOfPlaces).get(i).getName().equals(shortDescription.getName())){
-                listOfPlaces.get(currIndexInListOfPlaces).get(i).setIsChecked(shortDescription.getIsChecked());
+        if(shortDescription.getIsChecked()) selectedImage.setImageResource(android.R.drawable.ic_delete);
+        else selectedImage.setImageResource(android.R.drawable.ic_input_add);
+        selectedImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(shortDescription.getIsChecked()) {selectedImage.setImageResource(android.R.drawable.ic_input_add);
+                    shortDescription.setIsChecked(false);
+                }
+                else {selectedImage.setImageResource(android.R.drawable.ic_delete);
+                    shortDescription.setIsChecked(true);
+                }
+                for(int i = 0; i < listOfPlaces.get(currIndexInListOfPlaces).size(); i++)
+                    if(listOfPlaces.get(currIndexInListOfPlaces).get(i).getName().equals(shortDescription.getName())){
+                        listOfPlaces.get(currIndexInListOfPlaces).get(i).setIsChecked(shortDescription.getIsChecked());
+                    }
             }
-       }
-   });
-   placeImage.setOnClickListener(new View.OnClickListener() {
-       @Override
-       public void onClick(View view) {
-           FragmentController.changeNextFragment(new LongDescriptionFragment(), FragmentByName.LONG_DESCRIPTION_FRAGMENT);
-       }
-   });
-   name.setOnClickListener(new View.OnClickListener() {
-       @Override
-       public void onClick(View view) {
-           FragmentController.changeNextFragment(new LongDescriptionFragment(), FragmentByName.LONG_DESCRIPTION_FRAGMENT);
-       }
-   });
-   shortDectiprionView.setOnClickListener(new View.OnClickListener() {
-       @Override
-       public void onClick(View view) {
-           FragmentController.changeNextFragment(new LongDescriptionFragment(), FragmentByName.LONG_DESCRIPTION_FRAGMENT);
-       }
-   });
+        });
+        placeImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                currNameInListOfPlaces = shortDescription.getName();
+                FragmentController.changeNextFragment(new LongDescriptionFragment(), FragmentByName.LONG_DESCRIPTION_FRAGMENT);
+            }
+        });
+        name.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                currNameInListOfPlaces = shortDescription.getName();
+                FragmentController.changeNextFragment(new LongDescriptionFragment(), FragmentByName.LONG_DESCRIPTION_FRAGMENT);
+            }
+        });
+        shortDectiprionView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                currNameInListOfPlaces = shortDescription.getName();
+                FragmentController.changeNextFragment(new LongDescriptionFragment(), FragmentByName.LONG_DESCRIPTION_FRAGMENT);
+            }
+        });
 
     }
 }
