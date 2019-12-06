@@ -15,8 +15,10 @@ import com.example.triphelper.fragment.MainFragments.ListOfPlacesFragment;
 import com.example.triphelper.handler.FragmentController;
 import com.example.triphelper.handler.SystemFunctions;
 import com.example.triphelper.mvp.core.FragmentByName;
+import com.example.triphelper.placesAPI.PlaceAutocompleteAPI;
 
 public class MainActivity extends AppCompatActivity {
+    public static PlaceAutocompleteAPI.ApiInterface api;
     public static FragmentManager fragmentManager;
     public static FragmentTransaction fragmentTransaction;
     static public int WIDTH, HEIGHT;
@@ -29,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         WIDTH = getWindowManager().getDefaultDisplay().getWidth();
         HEIGHT = getWindowManager().getDefaultDisplay().getHeight();
+        api = PlaceAutocompleteAPI.getClient().create(PlaceAutocompleteAPI.ApiInterface.class);
         //getSupportActionBar().hide();
         fragmentManager = getSupportFragmentManager();
         context = this;

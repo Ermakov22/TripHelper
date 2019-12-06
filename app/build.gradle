@@ -41,6 +41,10 @@ dependencies {
     annotationProcessor "org.androidannotations:androidannotations:4.6.0"
     implementation "org.androidannotations:androidannotations-api:4.6.0"
 
+    implementation 'com.google.android.libraries.places:places:2.0.0'
+    implementation 'com.google.code.gson:gson:2.8.2'
+    implementation 'com.squareup.retrofit2:retrofit:2.3.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
 
     implementation 'org.slf4j:slf4j-nop:1.7.25'
     implementation 'androidx.recyclerview:recyclerview:1.0.0'

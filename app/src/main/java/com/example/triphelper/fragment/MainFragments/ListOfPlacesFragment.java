@@ -28,6 +28,7 @@ import com.example.triphelper.handler.OnSwipeTouchListener;
 import com.example.triphelper.activity.MainActivity;
 import com.example.triphelper.adapter.ShortDescriptionAdapter;
 import com.example.triphelper.handler.SystemFunctions;
+import com.example.triphelper.placesAPI.Reader;
 import com.example.triphelper.struct.Categories;
 import com.example.triphelper.struct.LongDescription;
 import com.example.triphelper.struct.ShortDescription;
@@ -38,6 +39,7 @@ import java.util.List;
 import static com.example.triphelper.activity.MainActivity.HEIGHT;
 
 public class ListOfPlacesFragment extends Fragment {
+    public Reader reader = new Reader();
     private RecyclerView shortDescriptionRecyclerView;
     private ShortDescriptionAdapter shortDescriptionRecyclerAdapter;
     private LinearLayout categoriesLayout;
@@ -100,6 +102,7 @@ public class ListOfPlacesFragment extends Fragment {
             }
 
         });
+
         return rootView;
     }
     //  @Override
@@ -133,18 +136,25 @@ public class ListOfPlacesFragment extends Fragment {
         fileListTest();
         shortDescriptionRecyclerView.setAdapter(shortDescriptionRecyclerAdapter);
     }
+    void inititTest(){
+        listOfPlaces.add(reader.getItems("museums in Rome"));
+        listOfPlaces.add(reader.getItems("museums in Rome"));
+        listOfPlaces.add(reader.getItems("cafes in Rome"));
+        listOfPlaces.add(reader.getItems("shops in Rome"));
+        listOfPlaces.add(reader.getItems("supermarkets in Rome"));
+    }
     public void fileListTest(){
         List<ShortDescription> listOfSightseeings = new ArrayList<>();
         List<LongDescription> longListOfSightseeings = new ArrayList<>();
-        listOfSightseeings.add(new ShortDescription(R.drawable.coliseum, "Колизей",
+       /* listOfSightseeings.add(new ShortDescription(R.drawable.coliseum, "Колизей",
                 "Древнеримская арена гладиаторских боев", false));
         listOfSightseeings.add(new ShortDescription(R.drawable.cathedral, "Базилика Святого Петра",
                 "Крупнейшая христианская церковь в мире", false));
         listOfSightseeings.add(new ShortDescription(R.drawable.forum, "Римский форум",
                 "Руины самого сердца Римской Империи", false));
         listOfSightseeings.add(new ShortDescription(R.drawable.pantheon, "Пантеон",
-                "Римский храм и исторические гробницы", false));
-        listOfPlaces.add(listOfSightseeings);
+                "Римский храм и исторические гробницы", false));*/
+        //listOfPlaces.add(listOfSightseeings);
         // long Description
         longListOfSightseeings.add(new LongDescription("1", "2", "3", R.drawable.coliseum));
         longListOfSightseeings.add(new LongDescription("4", "5", "6", R.drawable.coliseum));
@@ -153,15 +163,15 @@ public class ListOfPlacesFragment extends Fragment {
         longListOfPlaces.add(longListOfSightseeings);
         List<ShortDescription> listOfMuseums = new ArrayList<>();
         List<LongDescription> longListOfMuseums = new ArrayList<>();
-        listOfMuseums.add(new ShortDescription(R.drawable.museum_rome, "Музей Рима",
+       /* listOfMuseums.add(new ShortDescription(R.drawable.museum_rome, "Музей Рима",
                 "Музей современного искусства", false));
         listOfMuseums.add(new ShortDescription(R.drawable.museum_vatican, "Музей Ватикана",
                 "Художественный музей", false));
         listOfMuseums.add(new ShortDescription(R.drawable.museum_capitol, "Капитолийский Музей",
                 "Музей истории", false));
         listOfMuseums.add(new ShortDescription(R.drawable.museum_borg, "Галерея Боргезе",
-                "Художественный музей", false));
-        listOfPlaces.add(listOfMuseums);
+                "Художественный музей", false));*/
+        //listOfPlaces.add(listOfMuseums);
         // Long descrtiption
         longListOfMuseums.add(new LongDescription("1", "2", "3", R.drawable.shops));
         longListOfMuseums.add(new LongDescription("4", "5", "6", R.drawable.shops));
@@ -174,7 +184,7 @@ public class ListOfPlacesFragment extends Fragment {
         longListOfPlaces.add(longListOfMuseums);
         //Test
         List<ShortDescription> listOfCafes = new ArrayList<>();
-        listOfCafes.add(new ShortDescription(R.drawable.pantheon, "Tonnarello",
+      /*  listOfCafes.add(new ShortDescription(R.drawable.pantheon, "Tonnarello",
                 "$$ · Итальянская кухня", false));
         listOfCafes.add(new ShortDescription(R.drawable.pantheon, "Jazz Cafè",
                 "$$ · Итальянская кухня", false));
@@ -182,7 +192,7 @@ public class ListOfPlacesFragment extends Fragment {
                 "$$ · Римская кухня", false));
         listOfCafes.add(new ShortDescription(R.drawable.pantheon, "Zuma Rome",
                 "$$$$ · Японская кухня ", false));
-        listOfPlaces.add(listOfCafes);
+     //   listOfPlaces.add(listOfCafes);
         List<ShortDescription> listOfShops = new ArrayList<>();
         listOfShops.add(new ShortDescription(R.drawable.pantheon, "ZARA Rome",
                 "$$ · Магазин одежды", false));
@@ -192,7 +202,7 @@ public class ListOfPlacesFragment extends Fragment {
                 "$$$$ · Магазин изделий из кожи", false));
         listOfShops.add(new ShortDescription(R.drawable.pantheon, "Gap",
                 "$$ · Магазин одежды", false));
-        listOfPlaces.add(listOfShops);
+       // listOfPlaces.add(listOfShops);
         List<ShortDescription> listOfSupMarkets = new ArrayList<>();
         listOfSupMarkets.add(new ShortDescription(R.drawable.pantheon, "Todis",
                 "Супермаркет", false));
@@ -202,7 +212,8 @@ public class ListOfPlacesFragment extends Fragment {
                 "Супермаркет", false));
         listOfSupMarkets.add(new ShortDescription(R.drawable.pantheon, "Coop Supermarket",
                 "Супермаркет", false));
-        listOfPlaces.add(listOfSupMarkets);
+       // listOfPlaces.add(listOfSupMarkets);*/
+        inititTest();
         shortDescriptionRecyclerAdapter.setItems(listOfPlaces.get(currIndexInListOfPlaces));
         categoriesLayout.getChildAt(lastIndexSelected).findViewById(R.id.isSelectedCategory)
                 .setVisibility(View.INVISIBLE);
