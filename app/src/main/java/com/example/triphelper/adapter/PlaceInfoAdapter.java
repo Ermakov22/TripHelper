@@ -9,16 +9,16 @@ import android.widget.Filterable;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.triphelper.R;
-import com.example.triphelper.struct.ShortDescription;
+import com.example.triphelper.struct.PlaceInfo;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ShortDescriptionAdapter extends RecyclerView.Adapter<ShortDesctiptionViewHolder>
+public class PlaceInfoAdapter  extends RecyclerView.Adapter<PlaceInfoViewHolder>
         implements Filterable {
-    private List<ShortDescription> descriptionList = new ArrayList<>();
-    private List<ShortDescription> descriptionListFull;
-    public void setItems(List<ShortDescription> descriptionListCurr) {
+    private List<PlaceInfo> descriptionList = new ArrayList<>();
+    private List<PlaceInfo> descriptionListFull;
+    public void setItems(List<PlaceInfo> descriptionListCurr) {
         descriptionList.addAll(descriptionListCurr);
         descriptionListFull = new ArrayList<>(descriptionListCurr); // !!!!!!!!!!!!!!!!!!!!!!
         notifyDataSetChanged();
@@ -29,14 +29,14 @@ public class ShortDescriptionAdapter extends RecyclerView.Adapter<ShortDesctipti
         notifyDataSetChanged();
     }
     @Override
-    public ShortDesctiptionViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public PlaceInfoViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.short_decription_layout, parent, false);
-        return new ShortDesctiptionViewHolder(view);
+        return new PlaceInfoViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(ShortDesctiptionViewHolder holder, int position) {
+    public void onBindViewHolder(PlaceInfoViewHolder holder, int position) {
         holder.bind(descriptionList.get(position));
     }
 
@@ -52,18 +52,18 @@ public class ShortDescriptionAdapter extends RecyclerView.Adapter<ShortDesctipti
     private Filter exampleFilter = new Filter() {
         @Override
         protected FilterResults performFiltering(CharSequence charSequence) {
-            List<ShortDescription> filteredList = new ArrayList<>();
+            List<PlaceInfo> filteredList = new ArrayList<>();
 
             if(charSequence == null || charSequence.length() == 0){
                 filteredList.addAll(descriptionListFull);
             } else{
                 String filterPattern = charSequence.toString().toLowerCase().trim();
                 for(int i = 0; i < descriptionListFull.size(); i++){
-                    ShortDescription currItem = descriptionListFull.get(i);
+                    PlaceInfo currItem = descriptionListFull.get(i);
                     if(currItem.getName().toLowerCase().contains(filterPattern)
-                            || currItem.getShortDectiprion().toLowerCase().trim().contains(filterPattern)
-                            || (currItem.getName() + currItem.getShortDectiprion()).toLowerCase().trim().contains(filterPattern)
-                            || ( currItem.getShortDectiprion() + currItem.getName()).toLowerCase().trim().contains(filterPattern)){
+                            || currItem.getDescription().toLowerCase().trim().contains(filterPattern)
+                            || (currItem.getName() + currItem.getDescription()).toLowerCase().trim().contains(filterPattern)
+                            || ( currItem.getDescription() + currItem.getName()).toLowerCase().trim().contains(filterPattern)){
                         filteredList.add(currItem);
                     }
                 }

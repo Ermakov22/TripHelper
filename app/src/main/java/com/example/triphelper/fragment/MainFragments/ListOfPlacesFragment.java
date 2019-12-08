@@ -24,28 +24,26 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.triphelper.R;
+import com.example.triphelper.adapter.PlaceInfoAdapter;
 import com.example.triphelper.handler.OnSwipeTouchListener;
 import com.example.triphelper.activity.MainActivity;
-import com.example.triphelper.adapter.ShortDescriptionAdapter;
 import com.example.triphelper.handler.SystemFunctions;
 import com.example.triphelper.placesAPI.Reader;
 import com.example.triphelper.struct.Categories;
-import com.example.triphelper.struct.LongDescription;
-import com.example.triphelper.struct.ShortDescription;
-
+import com.example.triphelper.struct.PlaceInfo;
+import static com.example.triphelper.activity.MainActivity.listOfPlaces;
+import static com.example.triphelper.activity.MainActivity.reader;
 import java.util.ArrayList;
 import java.util.List;
 
 import static com.example.triphelper.activity.MainActivity.HEIGHT;
 
 public class ListOfPlacesFragment extends Fragment {
-    public Reader reader = new Reader();
     private RecyclerView shortDescriptionRecyclerView;
-    private ShortDescriptionAdapter shortDescriptionRecyclerAdapter;
+    private PlaceInfoAdapter placeInfoAdapter;
     private LinearLayout categoriesLayout;
     private List<Categories> listOfCategories;
-    public static List<List <ShortDescription> > listOfPlaces;
-    public static List<List <LongDescription> > longListOfPlaces;
+
     private int currWidth = -1, currHeight = -1 ;
     public static int currIndexInListOfPlaces = 0;
     public static String currNameInListOfPlaces = "";
@@ -65,8 +63,8 @@ public class ListOfPlacesFragment extends Fragment {
         mToolbar = (Toolbar) rootView.findViewById(R.id.toolbar);
         // setSupportActionBar(mToolbar); -- doesnt work!!!
         ((AppCompatActivity)getActivity()).setSupportActionBar(mToolbar);
-        listOfPlaces = new ArrayList<>();
-        longListOfPlaces = new ArrayList<>();
+      //  listOfPlaces = new ArrayList<>();
+       // initTest();
         fillListOfCategories();
         initRecyclerView();
         shortDescriptionRecyclerView.setOnTouchListener(new OnSwipeTouchListener(getActivity()) {
@@ -80,8 +78,8 @@ public class ListOfPlacesFragment extends Fragment {
                 lastIndexSelected = currIndexInListOfPlaces;
                 currIndexInListOfPlaces--;
                 if(currIndexInListOfPlaces == -1) currIndexInListOfPlaces = listOfPlaces.size() - 1;
-                shortDescriptionRecyclerAdapter.clearItems();
-                shortDescriptionRecyclerAdapter.setItems(listOfPlaces.get(currIndexInListOfPlaces));
+                placeInfoAdapter.clearItems();
+                placeInfoAdapter.setItems(listOfPlaces.get(currIndexInListOfPlaces));
                 categoriesLayout.getChildAt(lastIndexSelected).findViewById(R.id.isSelectedCategory)
                         .setVisibility(View.INVISIBLE);
                 categoriesLayout.getChildAt(currIndexInListOfPlaces).findViewById(R.id.isSelectedCategory)
@@ -93,8 +91,8 @@ public class ListOfPlacesFragment extends Fragment {
                 lastIndexSelected = currIndexInListOfPlaces;
                 currIndexInListOfPlaces++;
                 if(currIndexInListOfPlaces == listOfPlaces.size()) currIndexInListOfPlaces = 0;
-                shortDescriptionRecyclerAdapter.clearItems();
-                shortDescriptionRecyclerAdapter.setItems(listOfPlaces.get(currIndexInListOfPlaces));
+                placeInfoAdapter.clearItems();
+                placeInfoAdapter.setItems(listOfPlaces.get(currIndexInListOfPlaces));
                 categoriesLayout.getChildAt(lastIndexSelected).findViewById(R.id.isSelectedCategory)
                         .setVisibility(View.INVISIBLE);
                 categoriesLayout.getChildAt(currIndexInListOfPlaces).findViewById(R.id.isSelectedCategory)
@@ -118,13 +116,13 @@ public class ListOfPlacesFragment extends Fragment {
         mSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                shortDescriptionRecyclerAdapter.getFilter().filter(query);
+                placeInfoAdapter.getFilter().filter(query);
                 return false;
             }
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                shortDescriptionRecyclerAdapter.getFilter().filter(newText);
+                placeInfoAdapter.getFilter().filter(newText);
                 return false;
             }
         });
@@ -132,20 +130,13 @@ public class ListOfPlacesFragment extends Fragment {
     }
     private void initRecyclerView() {
         shortDescriptionRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        shortDescriptionRecyclerAdapter = new ShortDescriptionAdapter();
+        placeInfoAdapter = new PlaceInfoAdapter();
         fileListTest();
-        shortDescriptionRecyclerView.setAdapter(shortDescriptionRecyclerAdapter);
-    }
-    void inititTest(){
-        listOfPlaces.add(reader.getItems("museums in Rome"));
-        listOfPlaces.add(reader.getItems("museums in Rome"));
-        listOfPlaces.add(reader.getItems("cafes in Rome"));
-        listOfPlaces.add(reader.getItems("shops in Rome"));
-        listOfPlaces.add(reader.getItems("supermarkets in Rome"));
+        shortDescriptionRecyclerView.setAdapter(placeInfoAdapter);
     }
     public void fileListTest(){
-        List<ShortDescription> listOfSightseeings = new ArrayList<>();
-        List<LongDescription> longListOfSightseeings = new ArrayList<>();
+       // List<ShortDescription> listOfSightseeings = new ArrayList<>();
+       // List<LongDescription> longListOfSightseeings = new ArrayList<>();
        /* listOfSightseeings.add(new ShortDescription(R.drawable.coliseum, "Колизей",
                 "Древнеримская арена гладиаторских боев", false));
         listOfSightseeings.add(new ShortDescription(R.drawable.cathedral, "Базилика Святого Петра",
@@ -156,13 +147,13 @@ public class ListOfPlacesFragment extends Fragment {
                 "Римский храм и исторические гробницы", false));*/
         //listOfPlaces.add(listOfSightseeings);
         // long Description
-        longListOfSightseeings.add(new LongDescription("1", "2", "3", R.drawable.coliseum));
-        longListOfSightseeings.add(new LongDescription("4", "5", "6", R.drawable.coliseum));
-        longListOfSightseeings.add(new LongDescription("7", "8", "9", R.drawable.coliseum));
-        longListOfSightseeings.add(new LongDescription("10", "11", "12", R.drawable.coliseum));
-        longListOfPlaces.add(longListOfSightseeings);
-        List<ShortDescription> listOfMuseums = new ArrayList<>();
-        List<LongDescription> longListOfMuseums = new ArrayList<>();
+    //    longListOfSightseeings.add(new LongDescription("1", "2", "3", R.drawable.coliseum));
+     //   longListOfSightseeings.add(new LongDescription("4", "5", "6", R.drawable.coliseum));
+     //   longListOfSightseeings.add(new LongDescription("7", "8", "9", R.drawable.coliseum));
+     //   longListOfSightseeings.add(new LongDescription("10", "11", "12", R.drawable.coliseum));
+     //   longListOfPlaces.add(longListOfSightseeings);
+     //   List<ShortDescription> listOfMuseums = new ArrayList<>();
+     //   List<LongDescription> longListOfMuseums = new ArrayList<>();
        /* listOfMuseums.add(new ShortDescription(R.drawable.museum_rome, "Музей Рима",
                 "Музей современного искусства", false));
         listOfMuseums.add(new ShortDescription(R.drawable.museum_vatican, "Музей Ватикана",
@@ -173,17 +164,17 @@ public class ListOfPlacesFragment extends Fragment {
                 "Художественный музей", false));*/
         //listOfPlaces.add(listOfMuseums);
         // Long descrtiption
-        longListOfMuseums.add(new LongDescription("1", "2", "3", R.drawable.shops));
+       /* longListOfMuseums.add(new LongDescription("1", "2", "3", R.drawable.shops));
         longListOfMuseums.add(new LongDescription("4", "5", "6", R.drawable.shops));
         longListOfMuseums.add(new LongDescription("7", "8", "9", R.drawable.shops));
         longListOfMuseums.add(new LongDescription("10", "11", "12", R.drawable.shops));
-        longListOfPlaces.add(longListOfMuseums);
+        longListOfPlaces.add(longListOfMuseums);*/
         //Test
+       /* longListOfPlaces.add(longListOfMuseums);
         longListOfPlaces.add(longListOfMuseums);
-        longListOfPlaces.add(longListOfMuseums);
-        longListOfPlaces.add(longListOfMuseums);
+        longListOfPlaces.add(longListOfMuseums);*/
         //Test
-        List<ShortDescription> listOfCafes = new ArrayList<>();
+       // List<ShortDescription> listOfCafes = new ArrayList<>();
       /*  listOfCafes.add(new ShortDescription(R.drawable.pantheon, "Tonnarello",
                 "$$ · Итальянская кухня", false));
         listOfCafes.add(new ShortDescription(R.drawable.pantheon, "Jazz Cafè",
@@ -213,13 +204,13 @@ public class ListOfPlacesFragment extends Fragment {
         listOfSupMarkets.add(new ShortDescription(R.drawable.pantheon, "Coop Supermarket",
                 "Супермаркет", false));
        // listOfPlaces.add(listOfSupMarkets);*/
-        inititTest();
-        shortDescriptionRecyclerAdapter.setItems(listOfPlaces.get(currIndexInListOfPlaces));
+        placeInfoAdapter.setItems(listOfPlaces.get(currIndexInListOfPlaces));
         categoriesLayout.getChildAt(lastIndexSelected).findViewById(R.id.isSelectedCategory)
                 .setVisibility(View.INVISIBLE);
         categoriesLayout.getChildAt(currIndexInListOfPlaces).findViewById(R.id.isSelectedCategory)
                 .setVisibility(View.VISIBLE);
     }
+
     private void fillListOfCategories(){
         listOfCategories.add(new Categories(R.drawable.sightseeing_icon, "Интересности"));
         listOfCategories.add(new Categories(R.drawable.museum_icon, "Музеи"));
@@ -249,24 +240,24 @@ public class ListOfPlacesFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 lastIndexSelected = currIndexInListOfPlaces;
-                if(currName.equals("Интересности")) {shortDescriptionRecyclerAdapter.clearItems();
-                    shortDescriptionRecyclerAdapter.setItems(listOfPlaces.get(0));
+                if(currName.equals("Интересности")) {placeInfoAdapter.clearItems();
+                    placeInfoAdapter.setItems(listOfPlaces.get(0));
                     currIndexInListOfPlaces = 0;
                 }
-                else if(currName.equals("Музеи")) {shortDescriptionRecyclerAdapter.clearItems();
-                    shortDescriptionRecyclerAdapter.setItems(listOfPlaces.get(1));
+                else if(currName.equals("Музеи")) {placeInfoAdapter.clearItems();
+                    placeInfoAdapter.setItems(listOfPlaces.get(1));
                     currIndexInListOfPlaces = 1;
                 }
-                else if(currName.equals("Кафе")) {shortDescriptionRecyclerAdapter.clearItems();
-                    shortDescriptionRecyclerAdapter.setItems(listOfPlaces.get(2));
+                else if(currName.equals("Кафе")) {placeInfoAdapter.clearItems();
+                    placeInfoAdapter.setItems(listOfPlaces.get(2));
                     currIndexInListOfPlaces = 2;
                 }
-                else if(currName.equals("Магазины")) {shortDescriptionRecyclerAdapter.clearItems();
-                    shortDescriptionRecyclerAdapter.setItems(listOfPlaces.get(3));
+                else if(currName.equals("Магазины")) {placeInfoAdapter.clearItems();
+                    placeInfoAdapter.setItems(listOfPlaces.get(3));
                     currIndexInListOfPlaces = 3;
                 }
-                else  {shortDescriptionRecyclerAdapter.clearItems();
-                    shortDescriptionRecyclerAdapter.setItems(listOfPlaces.get(4));
+                else  {placeInfoAdapter.clearItems();
+                    placeInfoAdapter.setItems(listOfPlaces.get(4));
                     currIndexInListOfPlaces = 4;
                 }
                 categoriesLayout.getChildAt(lastIndexSelected).findViewById(R.id.isSelectedCategory)

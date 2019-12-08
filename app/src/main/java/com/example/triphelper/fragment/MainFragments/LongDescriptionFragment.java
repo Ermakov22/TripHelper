@@ -13,13 +13,13 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.triphelper.R;
+import com.example.triphelper.placesAPI.DownloadImageTask;
 
 import static com.example.triphelper.activity.MainActivity.HEIGHT;
 import static com.example.triphelper.activity.MainActivity.WIDTH;
 import static com.example.triphelper.fragment.MainFragments.ListOfPlacesFragment.currIndexInListOfPlaces;
 import static com.example.triphelper.fragment.MainFragments.ListOfPlacesFragment.currNameInListOfPlaces;
-import static com.example.triphelper.fragment.MainFragments.ListOfPlacesFragment.listOfPlaces;
-import static com.example.triphelper.fragment.MainFragments.ListOfPlacesFragment.longListOfPlaces;
+import static com.example.triphelper.activity.MainActivity.listOfPlaces;
 
 public class LongDescriptionFragment extends Fragment {
     @Nullable
@@ -32,15 +32,15 @@ public class LongDescriptionFragment extends Fragment {
             if(listOfPlaces.get(currIndexInListOfPlaces).get(i).getName().equals(currNameInListOfPlaces)){
                 ((TextView)(rootView.findViewById(R.id.longName))).setText(currNameInListOfPlaces);
                 ((TextView)(rootView.findViewById(R.id.longDescription))).setText(
-                        longListOfPlaces.get(currIndexInListOfPlaces).get(i).getLongDescription());
+                        listOfPlaces.get(currIndexInListOfPlaces).get(i).getDescription());
                 ((TextView)(rootView.findViewById(R.id.textAdress))).setText(
-                        longListOfPlaces.get(currIndexInListOfPlaces).get(i).getAdress());
+                        listOfPlaces.get(currIndexInListOfPlaces).get(i).getAdress());
                 int width = WIDTH;
                 int height = HEIGHT / 10 * 3;
                 LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(width,height);
                 ((rootView.findViewById(R.id.longImageID))).setLayoutParams(params);
-                ((ImageView)(rootView.findViewById(R.id.longImageID))).setImageResource(
-                        longListOfPlaces.get(currIndexInListOfPlaces).get(i).getImageID());
+                new DownloadImageTask(((ImageView)(rootView.findViewById(R.id.longImageID))))
+                        .execute(listOfPlaces.get(currIndexInListOfPlaces).get(i).getImage());
                 width = HEIGHT / 20;
                 params = new LinearLayout.LayoutParams(width,width);
                 ((rootView.findViewById(R.id.iconAdress))).setLayoutParams(params);

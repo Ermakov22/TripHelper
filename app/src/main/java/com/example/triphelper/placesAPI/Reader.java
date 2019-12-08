@@ -1,9 +1,11 @@
 package com.example.triphelper.placesAPI;
 
+import android.graphics.Bitmap;
 import android.util.Log;
+import android.widget.ImageView;
 
 import com.example.triphelper.R;
-import com.example.triphelper.struct.ShortDescription;
+import com.example.triphelper.struct.PlaceInfo;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,8 +19,8 @@ import static com.example.triphelper.activity.MainActivity.api;
 public class Reader {
 
     String TAG = "PLACE";
-    public List<ShortDescription> getItems(String input) {
-        List<ShortDescription> resultList = new ArrayList<>();
+    public List<PlaceInfo> getItems(String input) {
+        List<PlaceInfo> resultList = new ArrayList<>();
         String key = PlaceAutocompleteAPI.KEY;
         Log.d(TAG, input); /* show url */
         Call<PlaceSerializer> callPlaces = api.getPredictions(key, input);
@@ -50,8 +52,9 @@ public class Reader {
         Log.d(TAG, resultList.size() + " = resultList size");
         return resultList;
     }
-    ShortDescription detailInformation(String placeID){
-        ShortDescription currPoint = new ShortDescription("roflanENtin", "2", "3", false);;
+    PlaceInfo detailInformation(String placeID){
+        PlaceInfo currPoint = new PlaceInfo("roflanENtin", "2", "3", "ura",
+                "s", 2, 3, 4, "https://starpri.ru/wp-content/uploads/2019/02/mX2YdEeLJUo.jpg", false);
         String key = PlaceAutocompleteAPI.KEY;
         Call<PlaceDetailSerializer> callPlaces = api.getPlace(key, placeID);
         Log.d(TAG, callPlaces.request().url().toString()); /* show url */
@@ -66,8 +69,9 @@ public class Reader {
                     //String name = currPlace.getName();
                     //String description = currPlac
                     currPoint.setName(currPlace.getName());
-                    currPoint.setImageId(currPlace.getPhotoURL(500));
-                    if(currPoint.getImageId() == null) currPoint.setImageId("https://starpri.ru/wp-content/uploads/2019/02/mX2YdEeLJUo.jpg");
+                    String url = currPlace.getPhotoURL(600);
+                    if(url == null) url = "https://starpri.ru/wp-content/uploads/2019/02/mX2YdEeLJUo.jpg";
+                    currPoint.setImage(url);
                 }
                 @Override
                 public void onFailure(Call<PlaceDetailSerializer> call, Throwable t) {
