@@ -2,6 +2,7 @@ package com.example.triphelper.placesAPI;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.util.ArrayList;
 import java.util.List;
 
 class PlaceDetailSerializer {
@@ -18,7 +19,9 @@ class PlaceDetailSerializer {
         String short_name;
         String[] types;
     }
-
+    public class OpeningHours{
+        String[] weekday_text;
+    }
     public class Photo {
         int height;
         int width;
@@ -44,6 +47,9 @@ class PlaceDetailSerializer {
         @SerializedName("photos")
         private List<Photo> photos;
 
+        @SerializedName("opening_hours")
+        private OpeningHours opening_hours;
+
         @SerializedName("geometry")
         private Geometry geometry;
 
@@ -68,15 +74,33 @@ class PlaceDetailSerializer {
         public String getID() {
             return place_id;
         }
-
+        public List < String > getWeekday(){
+            List < String > ls = new ArrayList<>();
+            if(opening_hours == null) {
+                ls.add("Opening hours is not known");
+                return ls;
+            }
+            for(int i = 0; i < opening_hours.weekday_text.length; i++)
+                ls.add(opening_hours.weekday_text[i]);
+            return ls;
+        }
         public String getName() {
             return name;
         }
-
-        public String getAddress() {
-            return formatted_address;
+        public double getRating() {
+            if(rating == null) return 0;
+            return rating;
         }
-
+        public String getAddress() {
+            int cnt = 0;
+            String res = "";
+            for(int i = 0; i < formatted_address.length(); i++){
+                if(formatted_address.charAt(i) == ',') cnt++;
+                if(cnt == 2) break;
+                res += formatted_address.charAt(i);
+            }
+            return res;
+        }
         public List<Photo> getPhotos() {
             return photos;
         }

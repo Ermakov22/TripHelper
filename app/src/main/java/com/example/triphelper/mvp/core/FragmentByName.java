@@ -3,10 +3,9 @@ package com.example.triphelper.mvp.core;
 import org.jetbrains.annotations.Contract;
 
 public enum FragmentByName {
-    FIRST_START_FRAGMENT("FIRST_START_FRAGMENT"),
-    SECOND_START_FRAGMENT("SECOND_START_FRAGMENT"),
-    THIRD_START_FRAGMENT("THIRD_START_FRAGMENT"),
     LIST_OF_PLACES_FRAGMENT("LIST_OF_PLACES_FRAGMENT"),
+    MAIN_MENU_FRAGMENT("MAIN_MENU_FRAGMENT"),
+    LIST_OF_HOTELS("LIST_OF_HOTELS"),
     LONG_DESCRIPTION_FRAGMENT("LONG_DESCRIPTION_FRAGMENT");
 
     private final String name;

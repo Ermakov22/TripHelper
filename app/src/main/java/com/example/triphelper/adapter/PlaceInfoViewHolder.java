@@ -16,25 +16,28 @@ import com.example.triphelper.struct.PlaceInfo;
 
 import static com.example.triphelper.activity.MainActivity.HEIGHT;
 import static com.example.triphelper.activity.MainActivity.WIDTH;
+import static com.example.triphelper.activity.MainActivity.listOfPlaces;
 import static com.example.triphelper.fragment.MainFragments.ListOfPlacesFragment.currIndexInListOfPlaces;
 import static com.example.triphelper.fragment.MainFragments.ListOfPlacesFragment.currNameInListOfPlaces;
-import static com.example.triphelper.activity.MainActivity.listOfPlaces;
 
 public class PlaceInfoViewHolder  extends  RecyclerView.ViewHolder  {
     ImageView placeImage;
     TextView name;
-    TextView shortDectiprionView;
+    TextView rating;
+    TextView adress;
     ImageView selectedImage;
     public PlaceInfoViewHolder(View itemView){
         super(itemView);
         placeImage = (ImageView) itemView.findViewById(R.id.placeImage);
-        name = (TextView) itemView.findViewById(R.id.name);
-        shortDectiprionView = (TextView) itemView.findViewById(R.id.shortDescription);
         selectedImage = (ImageView) itemView.findViewById(R.id.imageSelected);
+        name = (TextView) itemView.findViewById(R.id.name);
+        rating = (TextView) itemView.findViewById(R.id.shortDescription);
+        adress = (TextView) itemView.findViewById(R.id.textShortAdress);
     }
     public void bind(PlaceInfo placeInfo){
         name.setText(placeInfo.getName());
-        shortDectiprionView.setText(placeInfo.getDescription());
+        rating.setText("Rating:" + placeInfo.getRating());
+        adress.setText(placeInfo.getAdress());
         int width = WIDTH;
         int height = HEIGHT / 10 * 3;
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(width,height);
@@ -76,7 +79,14 @@ public class PlaceInfoViewHolder  extends  RecyclerView.ViewHolder  {
                 FragmentController.changeNextFragment(new LongDescriptionFragment(), FragmentByName.LONG_DESCRIPTION_FRAGMENT);
             }
         });
-        shortDectiprionView.setOnClickListener(new View.OnClickListener() {
+        rating.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                currNameInListOfPlaces = placeInfo.getName();
+                FragmentController.changeNextFragment(new LongDescriptionFragment(), FragmentByName.LONG_DESCRIPTION_FRAGMENT);
+            }
+        });
+        adress.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 currNameInListOfPlaces = placeInfo.getName();

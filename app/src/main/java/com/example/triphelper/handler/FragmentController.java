@@ -1,7 +1,5 @@
 package com.example.triphelper.handler;
 
-import android.widget.Toast;
-
 import androidx.fragment.app.Fragment;
 
 import com.example.triphelper.R;
@@ -12,7 +10,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class FragmentController {
     public static void changeNextFragment(Fragment fragment, @NotNull FragmentByName fragmentByName){
-        if(fragmentByName.equalsName(FragmentByName.LIST_OF_PLACES_FRAGMENT.toString())){
+        if(fragmentByName.equalsName(FragmentByName.MAIN_MENU_FRAGMENT.toString())){
             MainActivity.fragmentTransaction = MainActivity.fragmentManager.beginTransaction();
             MainActivity.fragmentTransaction.add(R.id.main_layout, fragment);
             MainActivity.fragmentTransaction.commit();

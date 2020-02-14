@@ -1,21 +1,20 @@
 package com.example.triphelper.struct;
 
-import android.graphics.Bitmap;
-
-import com.example.triphelper.R;
+import java.util.List;
 
 public class PlaceInfo {
-    String name, description, adress, place_id, website;
+    String name, description, adress, place_id, website, image;
+    List< String > weekday;
     double lat, lon, rating;
-    String image;
     boolean isChecked;
     public PlaceInfo(String name, String description, String adress, String place_id, String website,
-                     double lat, double lon, double rating, String image, boolean isChecked){
+                     List < String > weekday, double lat, double lon, double rating, String image, boolean isChecked){
         this.name = name;
         this.description = description;
         this.adress = adress;
         this.place_id = place_id;
         this.website = website;
+        this.weekday = weekday;
         this.lat = lat;
         this.lon = lon;
         this.rating = rating;
@@ -31,6 +30,7 @@ public class PlaceInfo {
     }
     public void setPlace_id(String place_id){this.place_id = place_id;}
     public  void setWebsite(String website) {this.website = website;}
+    public  void setWeekday(List < String >  weekday) {this.weekday = weekday;}
     public void setLat(double lat){this.lat = lat;}
     public void setLon(double lon){this.lon = lon;}
     public void setRating(double rating){this.rating = rating;}
@@ -46,6 +46,7 @@ public class PlaceInfo {
     public String getAdress(){ return adress; }
     public String getPlace_id(){return place_id;}
     public String getWebsite(){return website;}
+    public List < String > getWeekday(){return weekday;}
     public double getLat(){return lat;}
     public double getLon(){return lon;}
     public double getRating(){return rating;}

@@ -1,10 +1,7 @@
 package com.example.triphelper.placesAPI;
 
-import android.graphics.Bitmap;
 import android.util.Log;
-import android.widget.ImageView;
 
-import com.example.triphelper.R;
 import com.example.triphelper.struct.PlaceInfo;
 
 import java.util.ArrayList;
@@ -54,7 +51,7 @@ public class Reader {
     }
     PlaceInfo detailInformation(String placeID){
         PlaceInfo currPoint = new PlaceInfo("roflanENtin", "2", "3", "ura",
-                "s", 2, 3, 4, "https://starpri.ru/wp-content/uploads/2019/02/mX2YdEeLJUo.jpg", false);
+                "s",new ArrayList<>(),  2, 3, 4, "https://starpri.ru/wp-content/uploads/2019/02/mX2YdEeLJUo.jpg", false);
         String key = PlaceAutocompleteAPI.KEY;
         Call<PlaceDetailSerializer> callPlaces = api.getPlace(key, placeID);
         Log.d(TAG, callPlaces.request().url().toString()); /* show url */
@@ -69,6 +66,10 @@ public class Reader {
                     //String name = currPlace.getName();
                     //String description = currPlac
                     currPoint.setName(currPlace.getName());
+                    currPoint.setAdress(currPlace.getAddress());
+                    currPoint.setPlace_id(currPlace.getID());
+                    currPoint.setRating(currPlace.getRating());
+                    currPoint.setWeekday(currPlace.getWeekday());
                     String url = currPlace.getPhotoURL(600);
                     if(url == null) url = "https://starpri.ru/wp-content/uploads/2019/02/mX2YdEeLJUo.jpg";
                     currPoint.setImage(url);

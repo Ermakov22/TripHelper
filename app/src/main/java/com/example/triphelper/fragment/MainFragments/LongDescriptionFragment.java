@@ -14,6 +14,7 @@ import androidx.fragment.app.Fragment;
 
 import com.example.triphelper.R;
 import com.example.triphelper.placesAPI.DownloadImageTask;
+import com.example.triphelper.struct.PlaceInfo;
 
 import static com.example.triphelper.activity.MainActivity.HEIGHT;
 import static com.example.triphelper.activity.MainActivity.WIDTH;
@@ -30,11 +31,19 @@ public class LongDescriptionFragment extends Fragment {
                 inflater.inflate(R.layout.long_description_fragment, container, false);
         for(int i = 0; i < listOfPlaces.get(currIndexInListOfPlaces).size(); i++){
             if(listOfPlaces.get(currIndexInListOfPlaces).get(i).getName().equals(currNameInListOfPlaces)){
+                String weekdayText = "";
+                PlaceInfo currPlace = listOfPlaces.get(currIndexInListOfPlaces).get(i);
                 ((TextView)(rootView.findViewById(R.id.longName))).setText(currNameInListOfPlaces);
-                ((TextView)(rootView.findViewById(R.id.longDescription))).setText(
-                        listOfPlaces.get(currIndexInListOfPlaces).get(i).getDescription());
+                ((TextView)(rootView.findViewById(R.id.longRating))).setText(
+                        "Rating:" + currPlace.getRating());
                 ((TextView)(rootView.findViewById(R.id.textAdress))).setText(
-                        listOfPlaces.get(currIndexInListOfPlaces).get(i).getAdress());
+                        currPlace.getAdress());
+                if(currPlace.getWeekday() != null){
+                    for(int j = 0; j < currPlace.getWeekday().size(); j++){
+                        weekdayText += currPlace.getWeekday().get(j) + '\n';
+                    }
+                }
+                ((TextView)(rootView.findViewById(R.id.textWeekDay))).setText(weekdayText);
                 int width = WIDTH;
                 int height = HEIGHT / 10 * 3;
                 LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(width,height);

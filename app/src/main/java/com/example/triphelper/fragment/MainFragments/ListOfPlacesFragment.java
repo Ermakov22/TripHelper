@@ -1,18 +1,15 @@
 package com.example.triphelper.fragment.MainFragments;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -26,17 +23,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.triphelper.R;
 import com.example.triphelper.adapter.PlaceInfoAdapter;
 import com.example.triphelper.handler.OnSwipeTouchListener;
-import com.example.triphelper.activity.MainActivity;
-import com.example.triphelper.handler.SystemFunctions;
-import com.example.triphelper.placesAPI.Reader;
 import com.example.triphelper.struct.Categories;
-import com.example.triphelper.struct.PlaceInfo;
-import static com.example.triphelper.activity.MainActivity.listOfPlaces;
-import static com.example.triphelper.activity.MainActivity.reader;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import static com.example.triphelper.activity.MainActivity.HEIGHT;
+import static com.example.triphelper.activity.MainActivity.listOfPlaces;
 
 public class ListOfPlacesFragment extends Fragment {
     private RecyclerView shortDescriptionRecyclerView;
@@ -112,7 +105,7 @@ public class ListOfPlacesFragment extends Fragment {
         inflater.inflate(R.menu.list_of_places_menu, menu);
         MenuItem mSearch = menu.findItem(R.id.action_search);
         SearchView mSearchView = (SearchView) mSearch.getActionView();
-        //  mSearchView.setQueryHint("Search");
+        mSearchView.setQueryHint("Search");
         mSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -212,11 +205,11 @@ public class ListOfPlacesFragment extends Fragment {
     }
 
     private void fillListOfCategories(){
-        listOfCategories.add(new Categories(R.drawable.sightseeing_icon, "Интересности"));
-        listOfCategories.add(new Categories(R.drawable.museum_icon, "Музеи"));
-        listOfCategories.add(new Categories(R.drawable.cafe_icon, "Кафе"));
-        listOfCategories.add(new Categories(R.drawable.shop_icon, "Магазины"));
-        listOfCategories.add(new Categories(R.drawable.supermarket_icon , "Супермаркеты"));
+        listOfCategories.add(new Categories(R.drawable.sightseeing_icon, "Attraction"));
+        listOfCategories.add(new Categories(R.drawable.museum_icon, "Museum"));
+        listOfCategories.add(new Categories(R.drawable.cafe_icon, "Cafe"));
+        listOfCategories.add(new Categories(R.drawable.shop_icon, "Shop"));
+        listOfCategories.add(new Categories(R.drawable.supermarket_icon , "Supermarket"));
         for(int i = 0; i < listOfCategories.size(); i++)
             categoriesLayout.addView(getView(i));
     }
@@ -240,19 +233,19 @@ public class ListOfPlacesFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 lastIndexSelected = currIndexInListOfPlaces;
-                if(currName.equals("Интересности")) {placeInfoAdapter.clearItems();
+                if(currName.equals("Attraction")) {placeInfoAdapter.clearItems();
                     placeInfoAdapter.setItems(listOfPlaces.get(0));
                     currIndexInListOfPlaces = 0;
                 }
-                else if(currName.equals("Музеи")) {placeInfoAdapter.clearItems();
+                else if(currName.equals("Museum")) {placeInfoAdapter.clearItems();
                     placeInfoAdapter.setItems(listOfPlaces.get(1));
                     currIndexInListOfPlaces = 1;
                 }
-                else if(currName.equals("Кафе")) {placeInfoAdapter.clearItems();
+                else if(currName.equals("Cafe")) {placeInfoAdapter.clearItems();
                     placeInfoAdapter.setItems(listOfPlaces.get(2));
                     currIndexInListOfPlaces = 2;
                 }
-                else if(currName.equals("Магазины")) {placeInfoAdapter.clearItems();
+                else if(currName.equals("Shop")) {placeInfoAdapter.clearItems();
                     placeInfoAdapter.setItems(listOfPlaces.get(3));
                     currIndexInListOfPlaces = 3;
                 }

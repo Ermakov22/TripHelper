@@ -19,7 +19,7 @@
         android:text="TextView" />
 
     <TextView
-        android:id="@+id/longDescription"
+        android:id="@+id/longRating"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="TextView" />
@@ -49,5 +49,11 @@
             android:layout_weight="1"
             android:text="TextView" />
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/textWeekDay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="TextView" />
 
 </LinearLayout>
