@@ -7,6 +7,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -22,7 +23,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.triphelper.R;
 import com.example.triphelper.adapter.PlaceInfoAdapter;
+import com.example.triphelper.handler.FragmentController;
 import com.example.triphelper.handler.OnSwipeTouchListener;
+import com.example.triphelper.mvp.core.FragmentByName;
 import com.example.triphelper.struct.Categories;
 
 import java.util.ArrayList;
@@ -36,6 +39,7 @@ public class ListOfPlacesFragment extends Fragment {
     private PlaceInfoAdapter placeInfoAdapter;
     private LinearLayout categoriesLayout;
     private List<Categories> listOfCategories;
+    private Button btnNext;
 
     private int currWidth = -1, currHeight = -1 ;
     public static int currIndexInListOfPlaces = 0;
@@ -54,6 +58,7 @@ public class ListOfPlacesFragment extends Fragment {
         categoriesLayout = (LinearLayout)rootView.findViewById(R.id.categoriesLinearLayout);
         shortDescriptionRecyclerView = rootView.findViewById(R.id.shortD_recycler_view);
         mToolbar = (Toolbar) rootView.findViewById(R.id.toolbar);
+        btnNext = (Button) rootView.findViewById(R.id.buttonNext);
         // setSupportActionBar(mToolbar); -- doesnt work!!!
         ((AppCompatActivity)getActivity()).setSupportActionBar(mToolbar);
       //  listOfPlaces = new ArrayList<>();
@@ -93,7 +98,12 @@ public class ListOfPlacesFragment extends Fragment {
             }
 
         });
-
+        btnNext.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FragmentController.changeNextFragment(new MapFragment(), FragmentByName.MAP_FRAGMENT);
+            }
+        });
         return rootView;
     }
     //  @Override

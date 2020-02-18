@@ -22,9 +22,9 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
+import static com.example.triphelper.activity.MainActivity.city;
 import static com.example.triphelper.activity.MainActivity.listOfPlaces;
 import static com.example.triphelper.activity.MainActivity.reader;
-import static com.example.triphelper.activity.MainActivity.city;
 
 public class MainMenuFragment extends Fragment {
 
@@ -52,13 +52,13 @@ public class MainMenuFragment extends Fragment {
         today = cal.getTime();
         date = formatter.format(today);
         departureDay.setText(date);
-        city = txtCity.getText().toString();
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String txt = txtCity.getText().toString();
+                //FragmentController.changeNextFragment(new MapFragment(), FragmentByName.MAP_FRAGMENT);
+                city = txtCity.getText().toString();
                 progressBar.setVisibility(ProgressBar.VISIBLE);
-                initTest(txt);
+                initTest(city);
                 //while(listOfPlaces.size() < 5)
                 //{}
                 Handler handler = new Handler();

@@ -29,6 +29,8 @@ public class MainActivity extends AppCompatActivity {
     static public int WIDTH, HEIGHT;
     public static final String MY_SETTINGS = "my_settings";
     public static Context context;
+    public static PlaceInfo hotel;
+    public static boolean ok = false;
     MainActivity mainActivity = this;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

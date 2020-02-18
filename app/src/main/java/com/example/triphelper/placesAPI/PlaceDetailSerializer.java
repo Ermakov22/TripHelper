@@ -84,6 +84,8 @@ class PlaceDetailSerializer {
                 ls.add(opening_hours.weekday_text[i]);
             return ls;
         }
+        public double getLat(){return geometry.location.lat;}
+        public double getLon(){return geometry.location.lng;}
         public String getName() {
             return name;
         }

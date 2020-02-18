@@ -17,6 +17,8 @@ import com.example.triphelper.struct.PlaceInfo;
 import static com.example.triphelper.activity.MainActivity.HEIGHT;
 import static com.example.triphelper.activity.MainActivity.WIDTH;
 import static com.example.triphelper.activity.MainActivity.listOfPlaces;
+import static com.example.triphelper.activity.MainActivity.hotel;
+import static com.example.triphelper.activity.MainActivity.ok;
 import static com.example.triphelper.fragment.MainFragments.ListOfPlacesFragment.currIndexInListOfPlaces;
 import static com.example.triphelper.fragment.MainFragments.ListOfPlacesFragment.currNameInListOfPlaces;
 
@@ -62,6 +64,9 @@ public class PlaceInfoViewHolder  extends  RecyclerView.ViewHolder  {
                 for(int i = 0; i < listOfPlaces.get(currIndexInListOfPlaces).size(); i++)
                     if(listOfPlaces.get(currIndexInListOfPlaces).get(i).getName().equals(placeInfo.getName())){
                         listOfPlaces.get(currIndexInListOfPlaces).get(i).setIsChecked(placeInfo.getIsChecked());
+                        if(!ok && placeInfo.getIsChecked()){
+                            hotel = listOfPlaces.get(currIndexInListOfPlaces).get(i);
+                        }
                     }
             }
         });

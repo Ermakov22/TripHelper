@@ -65,6 +65,8 @@ public class Reader {
                     Log.d(TAG, currPlace.toString());
                     //String name = currPlace.getName();
                     //String description = currPlac
+                    currPoint.setLat(currPlace.getLat());
+                    currPoint.setLon(currPlace.getLon());
                     currPoint.setName(currPlace.getName());
                     currPoint.setAdress(currPlace.getAddress());
                     currPoint.setPlace_id(currPlace.getID());
