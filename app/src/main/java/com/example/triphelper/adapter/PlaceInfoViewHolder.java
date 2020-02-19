@@ -3,6 +3,7 @@ package com.example.triphelper.adapter;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
@@ -16,8 +17,8 @@ import com.example.triphelper.struct.PlaceInfo;
 
 import static com.example.triphelper.activity.MainActivity.HEIGHT;
 import static com.example.triphelper.activity.MainActivity.WIDTH;
-import static com.example.triphelper.activity.MainActivity.listOfPlaces;
 import static com.example.triphelper.activity.MainActivity.hotel;
+import static com.example.triphelper.activity.MainActivity.listOfPlaces;
 import static com.example.triphelper.activity.MainActivity.ok;
 import static com.example.triphelper.fragment.MainFragments.ListOfPlacesFragment.currIndexInListOfPlaces;
 import static com.example.triphelper.fragment.MainFragments.ListOfPlacesFragment.currNameInListOfPlaces;
@@ -28,6 +29,7 @@ public class PlaceInfoViewHolder  extends  RecyclerView.ViewHolder  {
     TextView rating;
     TextView adress;
     ImageView selectedImage;
+    RatingBar ratingBar;
     public PlaceInfoViewHolder(View itemView){
         super(itemView);
         placeImage = (ImageView) itemView.findViewById(R.id.placeImage);
@@ -35,13 +37,15 @@ public class PlaceInfoViewHolder  extends  RecyclerView.ViewHolder  {
         name = (TextView) itemView.findViewById(R.id.name);
         rating = (TextView) itemView.findViewById(R.id.shortDescription);
         adress = (TextView) itemView.findViewById(R.id.textShortAdress);
+        ratingBar = itemView.findViewById(R.id.ratingBar);
     }
     public void bind(PlaceInfo placeInfo){
         name.setText(placeInfo.getName());
-        rating.setText("Rating:" + placeInfo.getRating());
+        rating.setText("" + placeInfo.getRating());
         adress.setText(placeInfo.getAdress());
+        ratingBar.setRating((float) placeInfo.getRating());
         int width = WIDTH;
-        int height = HEIGHT / 10 * 3;
+        int height = (int) ((double)HEIGHT / 10 * 3.2);
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(width,height);
         placeImage.setLayoutParams(params);
         //placeImage.setImageResource(shortDescription.getImageId());
@@ -71,6 +75,13 @@ public class PlaceInfoViewHolder  extends  RecyclerView.ViewHolder  {
             }
         });
         placeImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                currNameInListOfPlaces = placeInfo.getName();
+                FragmentController.changeNextFragment(new LongDescriptionFragment(), FragmentByName.LONG_DESCRIPTION_FRAGMENT);
+            }
+        });
+        ratingBar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 currNameInListOfPlaces = placeInfo.getName();

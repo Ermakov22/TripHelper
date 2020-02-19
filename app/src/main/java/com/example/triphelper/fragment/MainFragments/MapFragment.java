@@ -5,7 +5,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -44,7 +43,6 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
     private List<LatLng []> res = new ArrayList<>();
     private Button btnNext;
     private Button bntPrevious;
-    private ImageView imageView;
     private DirectionsResult result = null;
     private GeoApiContext geoApiContext;
     private LatLngBounds.Builder latLngBuilder;
@@ -59,7 +57,6 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
                 .build();
         btnNext = (Button) rootView.findViewById(R.id.buttonNextDay);
         bntPrevious = (Button) rootView.findViewById(R.id.buttonPreviousDay);
-        imageView = (ImageView) rootView.findViewById(R.id.imageViewTest);
         fillRes();
         return rootView;
     }
@@ -108,7 +105,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
             int ind = indexes.get(j);
             ff[j] = arrayOfPoint.get(ind);
         }
-        res.add(ff);
+        if(ff.length > 0) res.add(ff);
     }
     double getDist(LatLng a, LatLng b){
         return (((int)(sqrt(BIG * (
@@ -124,12 +121,14 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
     }
     @Override
     public void onMapReady(GoogleMap googleMap) {
-        MarkerOptions[] markers = new MarkerOptions[res.get(0).length];
-        for (int i = 0; i < res.get(0).length; i++) {
-            markers[i] = new MarkerOptions()
-                    .position(res.get(0)[i]);
-            googleMap.addMarker(markers[i]);
+        googleMap.addMarker(getMark(-1));
+        for (int i = 0; i < res.get(currInd).length; i++) {
+            googleMap.addMarker(getMark(i));
         }
+        googleMap.addPolyline(getPolyline());
+        LatLngBounds latLngBounds = latLngBuilder.build();
+        CameraUpdate track = CameraUpdateFactory.newLatLngBounds(latLngBounds, WIDTH, WIDTH, 25);
+        googleMap.moveCamera(track);
         btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

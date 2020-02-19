@@ -6,5 +6,6 @@
     <color name="black">#000000</color>
     <color name="Pattern">#8E80A5</color>
     <color name="White">#FFFFFF</color>
+    <color name="Gold">#D4AF37</color>
     <color name="Transparent">#cccccc</color>
 </resources>
